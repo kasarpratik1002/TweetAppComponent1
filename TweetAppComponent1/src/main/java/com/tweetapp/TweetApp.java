@@ -161,8 +161,12 @@ public class TweetApp {
 	}
 
 	public static int generateUniqueId() {
-		UUID uniqueKey = UUID.randomUUID();
-		return Integer.parseInt(uniqueKey.toString());
+		UUID idOne = UUID.randomUUID();
+		String str = "" + idOne;
+		int uid = str.hashCode();
+		String filterStr = "" + uid;
+		str = filterStr.replaceAll("-", "");
+		return Integer.parseInt(str);
 	}
 
 	public static String postATweet(String username) {

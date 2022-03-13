@@ -15,7 +15,7 @@ public class JDBCConnection {
 		Properties p=new Properties();
 		try {  
 		     
-		    FileInputStream reader=new FileInputStream(new File("D:\\StsWorkspace\\TweetAppComponent1\\src\\main\\resources\\db.properties"));
+		    FileInputStream reader=new FileInputStream(new File("D:\\git\\tweet\\TweetAppComponent1\\src\\main\\resources\\db.properties"));
 		    p.load(reader);
 			Class.forName(p.getProperty("driver-class"));
 		} catch (ClassNotFoundException ex) {
