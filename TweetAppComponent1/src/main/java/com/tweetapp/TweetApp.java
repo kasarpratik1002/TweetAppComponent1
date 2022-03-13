@@ -18,15 +18,12 @@ import com.tweetapp.serviceImpl.TweetServiceImpl;
 import com.tweetapp.serviceImpl.UserServiceImpl;
 import com.tweetapp.utils.TweetAppConstants;
 
-/**
- * Tweet App!
- *
- */
+
 public class TweetApp {
 	
 	
-	static Scanner sc = new Scanner(System.in);
-	static boolean isLogged = false;
+	static Scanner scanner = new Scanner(System.in);
+	static boolean isLoggedIn = false;
 	private static UserService userService = new UserServiceImpl();
 	private static TweetService tweetService = new TweetServiceImpl();
 	private static String username;
@@ -35,16 +32,16 @@ public class TweetApp {
 		int option;
 		while (true) {
 			System.out.println("--------------Menu------------");
-			if (!isLogged) {
+			if (!isLoggedIn) {
 				System.out.println("1.Register\n2.Login\n3.Forget Password");
-				option = Integer.parseInt(sc.nextLine());
+				option = Integer.parseInt(scanner.nextLine());
 				switch (option) {
 				case 1:
 					System.out.println(register());
 					break;
 				case 2:
-					isLogged = login();
-					if (!isLogged) {
+					isLoggedIn = login();
+					if (!isLoggedIn) {
 						username = null;
 					}
 					System.out.println(username);
@@ -58,7 +55,7 @@ public class TweetApp {
 			} else {
 				System.out.println(
 						"1.Post a tweet\n2.View my tweets\n3.View all tweets\n4.View all users\n5.View All users  and thier Tweets\n6.Reset Password\n7.Logout");
-				option = Integer.parseInt(sc.nextLine());
+				option = Integer.parseInt(scanner.nextLine());
 				switch (option) {
 				case 1:
 					System.out.println(postATweet(username));
@@ -93,10 +90,10 @@ public class TweetApp {
 					}
 					break;
 				case 6:
-					isLogged = resetPassword(username);
+					isLoggedIn = resetPassword(username);
 					break;
 				case 7:
-					isLogged = logOut();
+					isLoggedIn = logOut();
 					break;
 				default:
 					System.out.println("Enter the correct option");
@@ -109,11 +106,11 @@ public class TweetApp {
 		UserDetails userDetails = new UserDetails();
 		System.out.println("In Register Method");
 		System.out.println("Enter first Name");
-		userDetails.setFirstName(sc.nextLine());
+		userDetails.setFirstName(scanner.nextLine());
 		System.out.println("Enter last Name");
-		userDetails.setLastName(sc.nextLine());
+		userDetails.setLastName(scanner.nextLine());
 		System.out.println("Enter gender Name");
-		String gender = sc.nextLine();
+		String gender = scanner.nextLine();
 		if (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female") || gender.equalsIgnoreCase("others")) {
 			userDetails.setGender(gender);
 		} else {
@@ -121,7 +118,7 @@ public class TweetApp {
 			return "registration failed";
 		}
 		System.out.println("Enter Date of Birth in year-month-day format");
-		String dob = sc.nextLine();
+		String dob = scanner.nextLine();
 		try {
 			userDetails.setDob(Date.valueOf(dob));
 		} catch (Exception e) {
@@ -129,7 +126,7 @@ public class TweetApp {
 			return "registration failed";
 		}
 		System.out.println("Enter User Name");
-		String username = sc.nextLine();
+		String username = scanner.nextLine();
 		String regex = TweetAppConstants.EMAIL_FORMAT;
 		if (Pattern.compile(regex).matcher(username).matches()) {
 			userDetails.setUserName(username);
@@ -138,7 +135,7 @@ public class TweetApp {
 			return "registration failed";
 		}
 		System.out.println("Enter Password");
-		String pass = sc.nextLine();
+		String pass = scanner.nextLine();
 		if (pass.length() < 5 || pass.length() > 10) {
 			System.out.println("Password must be more or equal to 8 characters and less than 10 characters");
 			return "registration failed";
@@ -151,9 +148,9 @@ public class TweetApp {
 	public static boolean login() {
 		System.out.println("In Login Method");
 		System.out.println("Enter User Name");
-		String uname = sc.nextLine();
+		String uname = scanner.nextLine();
 		System.out.println("Enter Password");
-		String password = sc.nextLine();
+		String password = scanner.nextLine();
 		if (uname == null || password == null || uname.trim().isEmpty() || password.trim().isEmpty()) {
 			System.out.println("Login unsuccessful --> User name or password is empty");
 			return false;
@@ -164,12 +161,8 @@ public class TweetApp {
 	}
 
 	public static int generateUniqueId() {
-		UUID idOne = UUID.randomUUID();
-		String str = "" + idOne;
-		int uid = str.hashCode();
-		String filterStr = "" + uid;
-		str = filterStr.replaceAll("-", "");
-		return Integer.parseInt(str);
+		UUID uniqueKey = UUID.randomUUID();
+		return Integer.parseInt(uniqueKey.toString());
 	}
 
 	public static String postATweet(String username) {
@@ -177,7 +170,7 @@ public class TweetApp {
 		tweet.setTweetId(generateUniqueId());
 		tweet.setUsername(username);
 		System.out.println("Enter your tweet to post");
-		tweet.setTweet(sc.nextLine());
+		tweet.setTweet(scanner.nextLine());
 		return tweetService.postATweet(tweet);
 	}
 
@@ -215,11 +208,11 @@ public class TweetApp {
 	public static boolean resetPassword(String username) {
 		try {
 			System.out.println("Enter your old password");
-			String oldPassword = sc.nextLine();
+			String oldPassword = scanner.nextLine();
 			System.out.println("Enter your new password");
-			String newPassword = sc.nextLine();
+			String newPassword = scanner.nextLine();
 			System.out.println("Re-Enter your new password");
-			String newCheckPassword = sc.nextLine();
+			String newCheckPassword = scanner.nextLine();
 			if (newPassword.length() < 5 || newPassword.length() > 10) {
 				System.out.println("Password should be between 5 to 10 characters");
 				return true;
@@ -245,11 +238,11 @@ public class TweetApp {
 	public static void forgotPassword() {
 		try {
 			System.out.println("Enter your username");
-			String username = sc.nextLine();
+			String username = scanner.nextLine();
 			System.out.println("Enter your new password");
-			String newPassword = sc.nextLine();
+			String newPassword = scanner.nextLine();
 			System.out.println("Re-Enter your new password");
-			String newCheckPassword = sc.nextLine();
+			String newCheckPassword = scanner.nextLine();
 			if (newPassword.length() < 5 || newPassword.length() > 10) {
 				System.out.println("Password should be between 5 to 10 characters");
 			}

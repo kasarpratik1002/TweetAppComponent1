@@ -19,26 +19,25 @@ public class JDBCConnection {
 		    p.load(reader);
 			Class.forName(p.getProperty("driver-class"));
 		} catch (ClassNotFoundException ex) {
-			System.out.println("Sorry, couldn't found JDBC driver. Make sure you have added JDBC Maven Dependency Correctly");
+			System.out.println("Couldn't found JDBC driver. Make sure you have added JDBC Maven Dependency Correctly");
 		} catch (FileNotFoundException e) {
-			System.out.println("Sorry, unable to find db.properties file");
+			System.out.println("Unable to find db.properties file");
 		} catch (IOException e) {
-			System.out.println("Sorry, unable to load db.properties file");
+			System.out.println("Unable to load db.properties file");
 			return null;
 			
 		}
 
 		try {
-			// DriverManager: The basic service for managing a set of JDBC drivers.
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+p.getProperty("database"), p.getProperty("username"), p.getProperty("password"));
 			if (conn != null) {
 				return conn;
 			} else {
-				System.out.println("Failed to make connection!");
+				System.out.println("Failed to Establish connection!");
 				return null;
 			}
 		} catch (SQLException e) {
-			System.out.println("MySQL Connection Failed!");
+			System.out.println("Sorry!! MySQL Connection Failed!");
 			e.printStackTrace();
 			return null;
 	}
