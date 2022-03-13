@@ -16,6 +16,7 @@ import com.tweetapp.service.TweetService;
 import com.tweetapp.service.UserService;
 import com.tweetapp.serviceImpl.TweetServiceImpl;
 import com.tweetapp.serviceImpl.UserServiceImpl;
+import com.tweetapp.utils.TweetAppConstants;
 
 /**
  * Tweet App!
@@ -23,7 +24,7 @@ import com.tweetapp.serviceImpl.UserServiceImpl;
  */
 public class TweetApp {
 	
-	private static final Logger LOGGER = Logger.getLogger("TweetApp");
+	
 	static Scanner sc = new Scanner(System.in);
 	static boolean isLogged = false;
 	private static UserService userService = new UserServiceImpl();
@@ -129,7 +130,7 @@ public class TweetApp {
 		}
 		System.out.println("Enter User Name");
 		String username = sc.nextLine();
-		String regex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+		String regex = TweetAppConstants.EMAIL_FORMAT;
 		if (Pattern.compile(regex).matcher(username).matches()) {
 			userDetails.setUserName(username);
 		} else {

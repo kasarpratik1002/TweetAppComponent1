@@ -14,7 +14,7 @@ public final class TweetAppConstants {
 	public static final String INSERT_INTO_TWEETDETAILS= "insert into tweetdetails(tweetid,username,tweet) values (?,?,?);";
 	public static final String SELECT_FROM_TWEETDETAILS = "select * from tweetdetails;";
 	public static final String TWEET_ADDED_SUCCESSFULLY = "Tweet added Successfully";
-
+	public static final String EMAIL_FORMAT = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 
 }
 
