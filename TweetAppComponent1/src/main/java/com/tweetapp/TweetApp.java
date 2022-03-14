@@ -54,7 +54,7 @@ public class TweetApp {
 				}
 			} else {
 				System.out.println(
-						"1.Post a tweet\n2.View my tweets\n3.View all tweets\n4.View all users\n5.View All users  and thier Tweets\n6.Reset Password\n7.Logout");
+						"1.Post a tweet\n2.View my tweets\n3.View all tweets\n4.View all users\n5.View All users and Tweets\n6.Reset Password\n7.Logout");
 				option = Integer.parseInt(scanner.nextLine());
 				switch (option) {
 				case 1:
@@ -96,7 +96,7 @@ public class TweetApp {
 					isLoggedIn = logOut();
 					break;
 				default:
-					System.out.println("Enter the correct option");
+					System.out.println("Select correct option");
 				}
 			}
 		}
@@ -104,7 +104,7 @@ public class TweetApp {
 
 	public static String register() {
 		UserDetails userDetails = new UserDetails();
-		System.out.println("In Register Method");
+		System.out.println("In Register Method ");
 		System.out.println("Enter first Name");
 		userDetails.setFirstName(scanner.nextLine());
 		System.out.println("Enter last Name");
