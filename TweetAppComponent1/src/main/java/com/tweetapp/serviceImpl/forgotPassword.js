@@ -3,6 +3,7 @@ function forgotPassword(username,newpassword){
 	var Properties = Java.type("java.util.Properties");
     var Driver = Java.type("com.mysql.cj.jdbc.Driver");
     var driver = new Driver();
+    
     var properties = new Properties();
     var con = null;
     try {
