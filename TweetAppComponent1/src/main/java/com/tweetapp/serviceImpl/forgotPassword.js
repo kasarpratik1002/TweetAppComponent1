@@ -8,7 +8,7 @@ function forgotPassword(username,newpassword){
     try {
 	print("In javascript code ,for forget password");
         properties.setProperty("user", "root");
-        properties.setProperty("password", "Kumar@792");
+        properties.setProperty("password", "pratik@7030");
         con = driver.connect("jdbc:mysql://localhost:3306/tweetapp", properties);
 		var query="SELECT * from userdetails where username=\'"+username+"\'";
 		var stmt = con.prepareStatement(query);
@@ -21,14 +21,7 @@ function forgotPassword(username,newpassword){
 			return true;
 		}
 		return false;
-//	var query="SELECT * from userdetails where username=\'"+username+"\'";
-//	con.query(query,function(err,result){
-//		var sql = "UPDATE userdetails set password=\'"+newpassword+"\' where username=\'"+username+"\'";
-//		con.query(sql,function(err1,result1){
-//			print("success")
-//			return true;
-//		});
-//	});
+
 	}
 	catch(e) {
 		print(e);
@@ -38,12 +31,3 @@ function forgotPassword(username,newpassword){
 		con.close();
 	}
 }
-//var result=con.query("")
-//con.connect(function(err) {
-//  if (err) throw err;
-//  var sql = "UPDATE userdetails set password=\'"+password+"\' where username=\'"+username+"\'";
-//  con.query(sql, function (err, result) {
-//    if (err) throw err;
-//    console.log(result.affectedRows + " record(s) updated");
-//  });
-//});
